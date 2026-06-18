@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, make_response
 app = Flask(__name__)
  
 @app.route('/')
@@ -8,7 +8,10 @@ def index():
 
 @app.route('/abc')
 def hello():
-    return "hehe"
+        response = make_response('hehehheee\n')
+        response.status_code = 202
+        response.headers['content-type'] = 'application/octet-stream'
+        return response
 
 @app.route('/greet/<name>')
 def greet(name):
@@ -19,11 +22,6 @@ def add(number1, number2):
     return f"{number1} + {number2} = {number1 + number2}"
 
 
-#@app.route('/handle_url_params')
-#def handle_params():
- #   return str(request.args)
-#http://127.0.0.1:5555//handle_url_params?name=Rekhss&greeting=Helloo
-# output - ImmutableMultiDict([('name', 'Rekhss'), ('greeting', 'Helloo')])
 
 @app.route('/handle_url_params')
 def handle_params():
@@ -34,8 +32,6 @@ def handle_params():
     else:
         return 'some parameters are missing'
     
-# url - http://127.0.0.1:5555/handle_url_params?greeting=Hello&name=Rekhss
-# output - Hello, Rekhss
 
 @app.route('/greet_params')
 def greet_params():
@@ -48,3 +44,15 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0',port = 5555, debug = True)
 
 
+#------------------------------------------------------------------------
+#Browser:  http://127.0.0.1:5555/
+#Output:  Hello World
+
+#Browser:  http://127.0.0.1:5555/abc
+#Output:  hehe
+
+#Browser:  http://127.0.0.1:5555/greet/Rekhss
+#Output: helloo Rekhss
+
+#Browser: http://127.0.0.1:5555/handle_url_params?greeting=Hello&name=Rekhss
+#Output:Hello, Rekhss
