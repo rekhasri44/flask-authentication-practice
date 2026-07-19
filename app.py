@@ -6,7 +6,14 @@ def index():
     if request.method == 'GET':
        return render_template('index.html')
      else request.method == 'POST':
-       return ""
+       username = request.form.get('username')
+       password = request.form.get('password')
+
+       if username == 'rekha' and password == 'poorna':
+           return 'Success'
+       else:
+           return 'Failure'
+           
  
 
 if __name__ == '__main__': 
