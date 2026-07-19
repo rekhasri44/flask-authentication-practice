@@ -14,6 +14,9 @@ def index():
        else:
           return 'failure'
 
+@app.route('/file_upload')
+def file file_upload():
+    return ""
 if __name__ == '__main__': 
     app.run(host='0.0.0.0',port = 5555, debug = True)
 
