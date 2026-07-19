@@ -30,6 +30,9 @@ def file_upload():
         df = pd.read_excel(file)
         return df.to_html()
 
+@app.route('/convert_csv')
+def convert_csv():
+    return ""
     else:
         return "Unsupported file type"
 
